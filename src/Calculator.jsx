@@ -12,7 +12,17 @@ function Calculator() {
   ];
 
   const handleButtonClick = (value) => {
-   
+   if(value === "="){
+    try{
+        setDisplay(eval(display.toString()))
+    }catch(error){
+        setDisplay('Error');
+    }
+   }else if (value === 'C'){
+    setDisplay('0')
+   }else{
+    setDisplay(display === '0' ? value : display + value);
+   }
   };
 
   return (
@@ -22,7 +32,7 @@ function Calculator() {
        {buttons.map((button) => (
         <button 
         key = {button}
-        className='button'
+        className = {`button ${button === '=' ? 'equal' : ''}`}
         onClick={() => handleButtonClick(button)}
         >
             {button}
